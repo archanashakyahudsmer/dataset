@@ -42,7 +42,7 @@ PyMuPDF 1.28, not assumed):
 """
 
 # %% CELL 1 - install deps (Colab)
-# !pip install pikepdf pymupdf tqdm -q
+pip install pikepdf pymupdf tqdm -q
 
 
 # %% CELL 2 - config
@@ -781,23 +781,23 @@ def qa_sample(output_dir=OUTPUT_DIR, n=24, out_dir="qa_overlays",
 
 # %% CELL 7 - run it
 # --- upload a zip of PDFs ---
-# from google.colab import files
-# import zipfile
-# up = files.upload()
-# with zipfile.ZipFile(list(up.keys())[0]) as z:
-#     z.extractall("input_pdfs")
-#
-# build_dataset("input_pdfs")
+from google.colab import files
+import zipfile
+up = files.upload()
+with zipfile.ZipFile(list(up.keys())[0]) as z:
+    z.extractall("input_pdfs")
+
+build_dataset("input_pdfs")
 #
 # # eyeball a random sample of real pages (NOT a placeholder filename):
-# qa_sample(n=24)
-# qa_sample(n=12, only_quarantined=True)    # focus on the failures
+qa_sample(n=24)
+qa_sample(n=12, only_quarantined=True)    # focus on the failures
 #
-# # or one specific page:
-# import glob
-# qa_overlay(sorted(glob.glob("input_pdfs/**/*.pdf", recursive=True))[0], 0)
+# or one specific page:
+import glob
+qa_overlay(sorted(glob.glob("input_pdfs/**/*.pdf", recursive=True))[0], 0)
 #
 # --- package results ---
-# import shutil
-# shutil.make_archive("yolo_dataset", "zip", OUTPUT_DIR)
-# files.download("yolo_dataset.zip")
+import shutil
+shutil.make_archive("yolo_dataset", "zip", OUTPUT_DIR)
+files.download("yolo_dataset.zip")
